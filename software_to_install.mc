@@ -1,0 +1,19 @@
+
+[
+    "linux-lts",
+    "exa",
+    "iperf",
+    "fish",
+    "tmux",
+    "ansible",
+    "htop",
+    "speedtest-cli",
+    "zoxide",
+    "glances",
+    "docker",
+    "rsync",
+    "vim",
+    "the_silver_searcher",
+    "nano",
+    "wget"
+]
