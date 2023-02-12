@@ -6,7 +6,4 @@ Steps to setup:
 - choose to install a Custom Image
 - select Archlinux as the image
 - install
-- SSH in
-- Update (`pacman -Syu`)
-- install ansible (`pacman -S ansible`)
-- run the playbook!
+- run the playbook(s) using `ansible-playbook run.yml`. FOr the first run (and the first run only), you'll need to pass `--ask-pass`as an additional option, which will prompt for the root password.
