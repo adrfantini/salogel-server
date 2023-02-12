@@ -1,6 +1,6 @@
 arch_vps:
   hosts:
     salogel:
-      ansible_host: 185.135.137.15
+      ansible_host: salogel.adrianofantini.eu
       ansible_user: admin
       ansible_connection: ssh
