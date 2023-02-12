@@ -1,0 +1,8 @@
+- name: Initial setup
+  hosts: all
+  vars:
+    ansible_user: root # This play runs as root, since initially there are no other users defined
+    # Despite the documentation here: https://docs.ansible.com/ansible/latest/inventory_guide/connection_details.html#setting-a-remote-user
+    # remote_user: root does NOT seem to work. I think the ansible_user variable takes precedence
+  tasks:
+    - import_tasks: tasks/initial_setup.yml

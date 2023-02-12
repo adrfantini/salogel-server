@@ -1,0 +1,21 @@
+admin_user: admin
+
+ssh_key_url: https://github.com/adrfantini.keys
+
+default_shell: fish
+
+essential_packages: 
+  - "linux-lts"
+  - "exa"
+  - "iperf"
+  - "tmux"
+  - "htop"
+  - "speedtest-cli"
+  - "zoxide"
+  - "glances"
+  - "docker"
+  - "rsync"
+  - "vim"
+  - "the_silver_searcher"
+  - "nano"
+  - "wget"

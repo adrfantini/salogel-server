@@ -1,0 +1,61 @@
+- name: Update system
+  community.general.pacman:
+    update_cache: true
+    upgrade: true
+
+- name: Install default shell
+  community.general.pacman:
+    state: present
+    name: "{{ default_shell }}"
+
+- name: Set the default shell for root
+  ansible.builtin.user:
+    shell: "/usr/bin/{{ default_shell }}"
+    name: root
+
+- name: Create admin user
+  ansible.builtin.user:
+    shell: "/usr/bin/{{ default_shell }}"
+    name: "{{ admin_user }}"
+    password: '!' # locked password
+    group: wheel
+
+- name: Set authorized keys for root
+  ansible.posix.authorized_key:
+    user: root
+    state: present
+    key: "{{ ssh_key_url }}"
+
+- name: Set authorized keys for admin
+  ansible.posix.authorized_key:
+    user: "{{ admin_user }}"
+    state: present
+    key: "{{ ssh_key_url }}"
+
+- name: Configure sudo privileges for users in the wheel group
+  community.general.sudoers:
+    name: wheel-passwordless-sudo
+    state: present
+    nopassword: true
+    # runas: root
+    group: wheel
+    commands: ALL
+
+- name: Disable SSH password authentication
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: "^\\s*(#)?PasswordAuthentication\\s+yes\\s*$" 
+    line: "PasswordAuthentication no"
+  register: sshd_config
+
+- name: Restart SSH daemon
+  service:
+    name: sshd
+    state: restarted
+  when: sshd_config.changed
+
+- name: Install essential packages
+  community.general.pacman:
+    state: "latest"
+    name: "{{ essential_packages }}"
+  
