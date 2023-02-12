@@ -37,7 +37,6 @@
     name: wheel-passwordless-sudo
     state: present
     nopassword: true
-    # runas: root
     group: wheel
     commands: ALL
 
